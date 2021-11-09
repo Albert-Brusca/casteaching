@@ -22,15 +22,14 @@ class HelpersTest extends TestCase
         $this->assertDatabaseCount('users', 1);
 
         $this->assertDatabaseHas('users', [
-            'email' => config('casteaching.default_user.email')
+            'email' => config('casteaching.default_user.email'),
         ]);
+
         $this->assertDatabaseHas('users', [
-            'name' => config('casteaching.default_user.name')
+            'name' => config('casteaching.default_user.name'),
         ]);
 
-
-
-        $user = \App\Models\User::find(1);
+        $user = User::find(1);
 
         $this->assertNotNull($user);
         $this->assertEquals(config('casteaching.default_user.email'), $user->email);
@@ -40,8 +39,6 @@ class HelpersTest extends TestCase
     }
 
     /**
-     * A basic unit test example.
-     *
      * @test
      */
     public function create_default_videos()
@@ -49,6 +46,5 @@ class HelpersTest extends TestCase
         create_default_videos();
 
         $this->assertDatabaseCount('videos', 1);
-
     }
 }

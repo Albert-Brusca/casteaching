@@ -7,12 +7,18 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 if (! function_exists('create_default_user')) {
-
-    function create_default_user() {
-        User::create([
+    function create_default_user()
+    {
+        $user = User::create([
             'name' => config('casteaching.default_user.name', 'Albert Brusca'),
-            'email' => config('casteaching.default_user.email', 'abrusca@iesebre.com'),
-            'password' => Hash::make(config('casteaching.default_user.password', '123456789'))
+            'email' => config('casteaching.default_user.email','abrusca@iesebre.com'),
+            'password' => Hash::make(config('casteaching.default_user.password','12345678'))
+        ]);
+
+        $user1 = User::create([
+            'name' => config('casteaching.default_user.name_profe', 'Sergi Tur Badenas'),
+            'email' => config('casteaching.default_user.email_profe','sergiturbadenas@gmail.com'),
+            'password' => Hash::make(config('casteaching.default_user.password_profe','12345678'))
         ]);
 
         try {
@@ -21,15 +27,22 @@ if (! function_exists('create_default_user')) {
                 'user_id' => $user->id,
                 'personal_team' => true
             ]);
+
+            Team::create([
+                'name' => $user1->name . "'s Team",
+                'user_id' => $user1->id,
+                'personal_team' => true
+            ]);
         } catch (\Exception $exception) {
 
         }
+
     }
 }
 
 if (! function_exists('create_default_videos')) {
-
-    function create_default_videos() {
+    function create_default_videos()
+    {
         Video::create([
             'title' => 'Ubuntu 101',
             'description' => '# Here description',
