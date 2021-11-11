@@ -19,7 +19,7 @@
                         Data de publicació
                     </dt>
                     <dd class="mt-1 text-1xl font-semibold text-gray-900">
-                        {{ $video->published_at }}
+                        {{ $video->formatted_published_at }}
                     </dd>
                 </div>
                 {{--                <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">--}}
