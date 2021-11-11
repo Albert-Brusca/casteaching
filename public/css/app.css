@@ -1281,6 +1281,12 @@ select {
 .col-span-6 {
 	grid-column: span 6 / span 6;
 }
+.m-5 {
+	margin: 1.25rem;
+}
+.m-4 {
+	margin: 1rem;
+}
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
@@ -1359,6 +1365,9 @@ select {
 }
 .block {
 	display: block;
+}
+.inline-block {
+	display: inline-block;
 }
 .flex {
 	display: flex;
@@ -1456,6 +1465,9 @@ select {
 .w-20 {
 	width: 5rem;
 }
+.w-5\/6 {
+	width: 83.333333%;
+}
 .min-w-0 {
 	min-width: 0px;
 }
@@ -1470,6 +1482,9 @@ select {
 }
 .max-w-6xl {
 	max-width: 72rem;
+}
+.max-w-3xl {
+	max-width: 48rem;
 }
 .flex-1 {
 	flex: 1 1 0%;
@@ -1551,6 +1566,9 @@ select {
 }
 .gap-1 {
 	gap: 0.25rem;
+}
+.gap-5 {
+	gap: 1.25rem;
 }
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
 	--tw-space-x-reverse: 0;
@@ -1643,6 +1661,9 @@ select {
 .border-r {
 	border-right-width: 1px;
 }
+.border-t-2 {
+	border-top-width: 2px;
+}
 .border-gray-300 {
 	--tw-border-opacity: 1;
 	border-color: rgba(209, 213, 219, var(--tw-border-opacity));
@@ -1665,6 +1686,14 @@ select {
 .border-gray-400 {
 	--tw-border-opacity: 1;
 	border-color: rgba(156, 163, 175, var(--tw-border-opacity));
+}
+.border-indigo-500 {
+	--tw-border-opacity: 1;
+	border-color: rgba(99, 102, 241, var(--tw-border-opacity));
+}
+.border-blue-800 {
+	--tw-border-opacity: 1;
+	border-color: rgba(30, 64, 175, var(--tw-border-opacity));
 }
 .bg-white {
 	--tw-bg-opacity: 1;
@@ -1738,6 +1767,9 @@ select {
 }
 .p-4 {
 	padding: 1rem;
+}
+.p-3 {
+	padding: 0.75rem;
 }
 .px-4 {
 	padding-left: 1rem;
@@ -1828,6 +1860,9 @@ select {
 .pt-8 {
 	padding-top: 2rem;
 }
+.pr-5 {
+	padding-right: 1.25rem;
+}
 .text-left {
 	text-align: left;
 }
@@ -1866,6 +1901,10 @@ select {
 .text-xl {
 	font-size: 1.25rem;
 	line-height: 1.75rem;
+}
+.text-3xl {
+	font-size: 1.875rem;
+	line-height: 2.25rem;
 }
 .font-medium {
 	font-weight: 500;
@@ -2348,6 +2387,10 @@ select {
 		--tw-scale-x: 1;
 		--tw-scale-y: 1;
 		transform: var(--tw-transform);
+	}
+
+	.sm\:grid-cols-3 {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 
 	.sm\:items-start {
@@ -2855,6 +2898,11 @@ select {
 
 	.md\:p-3 {
 		padding: 0.75rem;
+	}
+
+	.md\:px-6 {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
 	}
 }
 @media (min-width: 1024px) {
