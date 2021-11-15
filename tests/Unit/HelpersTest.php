@@ -19,7 +19,7 @@ class HelpersTest extends TestCase
     {
         create_default_user();
 
-        $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseCount('users', 2);
 
         $this->assertDatabaseHas('users', [
             'email' => config('casteaching.default_user.email'),
@@ -29,7 +29,7 @@ class HelpersTest extends TestCase
             'name' => config('casteaching.default_user.name'),
         ]);
 
-        $user = User::find(1);
+        $user = \App\Models\User::find(1);
 
         $this->assertNotNull($user);
         $this->assertEquals(config('casteaching.default_user.email'), $user->email);

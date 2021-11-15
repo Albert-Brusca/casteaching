@@ -22,6 +22,22 @@
                         {{ $video->formatted_published_at }}
                     </dd>
                 </div>
+                <div class="px-4 py-2 bg-gray-100 bg-white shadow rounded-lg overflow-hidden">
+                    <dt class="text-sm font-medium text-gray-500 truncate">
+                        Publicat
+                    </dt>
+                    <dd class="mt-1 text-1xl font-semibold text-gray-900">
+                        {{ $video->formatted_forHumans_published_at }}
+                    </dd>
+                </div>
+                <div class="px-4 py-2 bg-gray-100 bg-white shadow rounded-lg overflow-hidden">
+                    <dt class="text-sm font-medium text-gray-500 truncate">
+                        Time stamp
+                    </dt>
+                    <dd class="mt-1 text-1xl font-semibold text-gray-900">
+                        {{ $video->published_atTimestamp }}
+                    </dd>
+                </div>
                 {{--                <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">--}}
                 {{--                    <dt class="text-sm font-medium text-gray-500 truncate">--}}
                 {{--                        Avg. Open Rate--}}

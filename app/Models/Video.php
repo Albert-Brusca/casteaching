@@ -27,14 +27,14 @@ class Video extends Model
         return $locale_date->day . ' de ' . $locale_date->monthName . ' de ' . $locale_date->year;
     }
 
-//    public function getFormattedForHumansPublishedAtAttribute()
-//    {
-//        return optional($this->published_at)->diffForHumans(Carbon::now());
-//    }
-//
-//    public function getPublishedAtTimestampAttribute()
-//    {
-//        return optional($this->published_at)->timestamp;
-//    }
+    public function getFormattedForHumansPublishedAtAttribute()
+    {
+        return optional($this->published_at)->diffForHumans(Carbon::now());
+    }
+
+    public function getPublishedAtTimestampAttribute()
+    {
+        return optional($this->published_at)->timestamp;
+    }
 
 }
