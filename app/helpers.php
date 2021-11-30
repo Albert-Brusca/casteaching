@@ -13,17 +13,30 @@ if (! function_exists('create_default_user')) {
     function create_default_user()
     {
         $user = User::create([
-            'name' => config('casteaching.default_user.name', 'Albert Brusca'),
-            'email' => config('casteaching.default_user.email','abrusca@iesebre.com'),
+            'name' => 'Albert Brusca',
+            'email' => 'abrusca@iesebre.com',
             'password' => Hash::make(config('casteaching.default_user.password','12345678'))
         ]);
         $user->superadmin = true;
         $user->save();
 
-
+        $user1 = User::create([
+            'name' => 'Sergi Tur',
+            'email' => 'sergitur@gmail.com',
+            'password' => Hash::make(config('casteaching.default_user.password_profe'))
+        ]);
 
         add_personal_team($user);
 
+        try {
+            Team::create([
+                'name' => $user1->name . "'s Team",
+                'user_id' => $user1->id,
+                'personal_team' => true
+            ]);
+        } catch (\Exception $exception) {
+
+        }
 
     }
 }
