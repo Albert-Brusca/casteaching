@@ -15,7 +15,7 @@ if (! function_exists('create_default_user')) {
         $user = User::create([
             'name' => 'Albert Brusca',
             'email' => 'abrusca@iesebre.com',
-            'password' => Hash::make(config('casteaching.default_user.password','12345678'))
+            'password' => Hash::make('password')
         ]);
         $user->superadmin = true;
         $user->save();
@@ -23,7 +23,7 @@ if (! function_exists('create_default_user')) {
         $user1 = User::create([
             'name' => 'Sergi Tur',
             'email' => 'sergitur@gmail.com',
-            'password' => Hash::make(config('casteaching.default_user.password_profe'))
+            'password' => Hash::make('password')
         ]);
 
         add_personal_team($user);
