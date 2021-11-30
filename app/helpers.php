@@ -20,23 +20,10 @@ if (! function_exists('create_default_user')) {
         $user->superadmin = true;
         $user->save();
 
-        $user1 = User::create([
-            'name' => config('casteaching.default_user.name_profe'),
-            'email' => config('casteaching.default_user.email_profe'),
-            'password' => Hash::make(config('casteaching.default_user.password_profe'))
-        ]);
+
 
         add_personal_team($user);
 
-        try {
-            Team::create([
-                'name' => $user1->name . "'s Team",
-                'user_id' => $user1->id,
-                'personal_team' => true
-            ]);
-        } catch (\Exception $exception) {
-
-        }
 
     }
 }
