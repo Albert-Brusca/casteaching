@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 
+
 if (! function_exists('create_default_user')) {
     function create_default_user()
     {
@@ -20,9 +21,9 @@ if (! function_exists('create_default_user')) {
         $user->save();
 
         $user1 = User::create([
-            'name' => config('casteaching.default_user.name_profe', 'Sergi Tur Badenas'),
-            'email' => config('casteaching.default_user.email_profe','sergiturbadenas@gmail.com'),
-            'password' => Hash::make(config('casteaching.default_user.password_profe','12345678'))
+            'name' => config('casteaching.default_user.name_profe'),
+            'email' => config('casteaching.default_user.email_profe'),
+            'password' => Hash::make(config('casteaching.default_user.password_profe'))
         ]);
 
         add_personal_team($user);
