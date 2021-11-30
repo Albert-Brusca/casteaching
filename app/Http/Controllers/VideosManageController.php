@@ -27,7 +27,15 @@ class VideosManageController extends Controller
 
     public function store(Request $request)
     {
-        //
+        Video::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'url' => $request->url,
+        ]);
+
+        session()->flash('status', 'Successfully created');
+
+        return redirect()->route('manage.videos');
     }
 
     public function show($id)
