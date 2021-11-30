@@ -42,7 +42,10 @@
                                     {{ $user->email }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ $user->superadmin }}
+                                    @if($user->superadmin == 1) Si
+                                    @else No
+                                    @endif
+
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="/users/{{$user->id}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Show</a>
