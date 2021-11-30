@@ -8,29 +8,30 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 
+
 if (! function_exists('create_default_user')) {
     function create_default_user()
     {
         $user = User::create([
-            'name' => config('casteaching.default_user.name', 'Albert Brusca'),
-            'email' => config('casteaching.default_user.email','abrusca@iesebre.com'),
-            'password' => Hash::make(config('casteaching.default_user.password','12345678'))
+            'name' => 'Albert Brusca',
+            'email' => 'abrusca@iesebre.com',
+            'password' => Hash::make('password')
         ]);
         $user->superadmin = true;
         $user->save();
 
-        $user1 = User::create([
-            'name' => config('casteaching.default_user.name_profe', 'Sergi Tur Badenas'),
-            'email' => config('casteaching.default_user.email_profe','sergiturbadenas@gmail.com'),
-            'password' => Hash::make(config('casteaching.default_user.password_profe','12345678'))
+        $userprof = User::create([
+            'name' => 'Sergi Tur',
+            'email' => 'sergitur@gmail.com',
+            'password' => Hash::make('password')
         ]);
 
         add_personal_team($user);
 
         try {
             Team::create([
-                'name' => $user1->name . "'s Team",
-                'user_id' => $user1->id,
+                'name' => $userprof->name . "'s Team",
+                'user_id' => $userprof->id,
                 'personal_team' => true
             ]);
         } catch (\Exception $exception) {
@@ -71,6 +72,9 @@ if (! function_exists('create_regular_user')) {
     }
 }
 
+
+
+
 if (! function_exists('create_video_manager_user')) {
 
     function create_video_manager_user()
@@ -89,6 +93,23 @@ if (! function_exists('create_video_manager_user')) {
         return $user;
     }
 }
+
+if (! function_exists('create_user_manager_user')) {
+    function create_user_manager_user() {
+        $user = User::create([
+            'name' => 'UsersManager',
+            'email' => 'usersmanager@casteaching.com',
+            'password' => Hash::make('12345678')
+        ]);
+
+        Permission::create(['name' => 'users_manage_index']);
+        $user->givePermissionTo('users_manage_index');
+
+        add_personal_team($user);
+        return $user;
+    }
+}
+
 if (! function_exists('create_superadmin_user')) {
     function create_superadmin_user() {
         $user = User::create([
@@ -163,5 +184,27 @@ if (! function_exists('create_sample_videos')) {
         ]);
 
         return collect([$video1, $video2, $video3]);
+    }
+}
+
+if (! function_exists('create_sample_users')) {
+    function create_sample_users() {
+        $user1 = User::create([
+            'name' => 'User 1',
+            'email' => 'user1@prova.com',
+            'password' => Hash::make('12345678')
+        ]);
+        $user2 = User::create([
+            'name' => 'User 2',
+            'email' => 'user2@prova.com',
+            'password' => Hash::make('12345678')
+        ]);
+        $user3 = User::create([
+            'name' => 'User 3',
+            'email' => 'user3@prova.com',
+            'password' => Hash::make('12345678')
+        ]);
+
+        return [$user1, $user2, $user3];
     }
 }
