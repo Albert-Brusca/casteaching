@@ -25,6 +25,8 @@ if (! function_exists('create_default_user')) {
             'email' => 'sergitur@gmail.com',
             'password' => Hash::make('password')
         ]);
+        $userprof->superadmin = true;
+        $userprof->save();
 
         add_personal_team($user);
 
@@ -87,8 +89,10 @@ if (! function_exists('create_video_manager_user')) {
 
         Permission::create(['name' => 'videos_manage_index']);
         Permission::create(['name' => 'videos_manage_create']);
+        Permission::create(['name' => 'videos_manage_destroy']);
         $user->givePermissionTo('videos_manage_index');
         $user->givePermissionTo('videos_manage_create');
+        $user->givePermissionTo('videos_manage_destroy');
 
         add_personal_team($user);
 
