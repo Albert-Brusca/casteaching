@@ -49,7 +49,7 @@ if (! function_exists('create_default_videos')) {
         Video::create([
             'title' => 'Ubuntu 101',
             'description' => '# Here description',
-            'url' => 'https://youtu.be/w8j07_DBl_I',
+            'url' => 'https://www.youtube.com/embed/w8j07_DBl_I',
             'published_at' => Carbon::parse('December 13, 2020 8:00pm'),
             'previous' => null,
             'next' => null,
@@ -90,9 +90,13 @@ if (! function_exists('create_video_manager_user')) {
         Permission::create(['name' => 'videos_manage_index']);
         Permission::create(['name' => 'videos_manage_create']);
         Permission::create(['name' => 'videos_manage_destroy']);
+        Permission::create(['name' => 'videos_manage_edit']);
+        Permission::create(['name' => 'videos_manage_update']);
         $user->givePermissionTo('videos_manage_index');
         $user->givePermissionTo('videos_manage_create');
         $user->givePermissionTo('videos_manage_destroy');
+        $user->givePermissionTo('videos_manage_edit');
+        $user->givePermissionTo('videos_manage_update');
 
         add_personal_team($user);
 
@@ -175,6 +179,10 @@ if (! function_exists('create_permissions')) {
     function create_permissions() {
         Permission::firstOrCreate(['name' => 'videos_manage_index']);
         Permission::firstOrCreate(['name' => 'videos_manage_create']);
+        Permission::firstOrCreate(['name' => 'videos_manage_store']);
+        Permission::firstOrCreate(['name' => 'videos_manage_destroy']);
+        Permission::firstOrCreate(['name' => 'videos_manage_edit']);
+        Permission::firstOrCreate(['name' => 'videos_manage_update']);
     }
 }
 
@@ -183,17 +191,17 @@ if (! function_exists('create_sample_videos')) {
         $video1 = Video::create([
            'title' => 'Video 1',
            'description' => 'Bla Bla Bla',
-           'url' => 'https://youtu.be/6SxjClAdXZ8',
+           'url' => 'https://www.youtube.com/embed/6SxjClAdXZ8',
         ]);
         $video2 = Video::create([
             'title' => 'Video 2',
             'description' => 'Bla Bla Bla',
-            'url' => 'https://youtu.be/_9E44YHvQCE',
+            'url' => 'https://www.youtube.com/embed/_9E44YHvQCE',
         ]);
         $video3 = Video::create([
             'title' => 'Video 3',
             'description' => 'Bla Bla Bla',
-            'url' => 'https://youtu.be/XhtrZeueW-w',
+            'url' => 'https://www.youtube.com/embed/XhtrZeueW-w',
         ]);
 
         return collect([$video1, $video2, $video3]);
