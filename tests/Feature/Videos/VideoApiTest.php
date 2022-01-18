@@ -6,6 +6,7 @@ use App\Models\Video;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Testing\Fluent\AssertableJson;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
 /**
@@ -13,7 +14,7 @@ use Tests\TestCase;
  */
 class VideoApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CanLogin;
 
 
     public function guest_users_cannot_update_videos()
@@ -296,13 +297,4 @@ class VideoApiTest extends TestCase
         $response->assertStatus(404);
     }
 
-    private function loginAsVideoManager()
-    {
-        Auth::login(create_video_manager_user());
-    }
-
-    private function loginAsRegularUser()
-    {
-        Auth::login(create_regular_user());
-    }
 }
