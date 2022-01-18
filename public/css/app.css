@@ -1391,11 +1391,11 @@ select {
 .mb-4 {
 	margin-bottom: 1rem;
 }
-.mb-1 {
-	margin-bottom: 0.25rem;
-}
 .-mt-px {
 	margin-top: -1px;
+}
+.mb-1 {
+	margin-bottom: 0.25rem;
 }
 .ml-auto {
 	margin-left: auto;
@@ -1700,11 +1700,11 @@ select {
 .border-t-2 {
 	border-top-width: 2px;
 }
-.border-r-0 {
-	border-right-width: 0px;
-}
 .border-r {
 	border-right-width: 1px;
+}
+.border-r-0 {
+	border-right-width: 0px;
 }
 .border-gray-300 {
 	--tw-border-opacity: 1;
