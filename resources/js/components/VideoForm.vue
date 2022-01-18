@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import bus from '../bus.js'
 export default {
     name: "VideoForm",
     data() {
@@ -80,11 +81,18 @@ export default {
     },
     methods: {
         store() {
-            window.casteaching.video.create( {
-                title: this.video.title,
-                url: this.video.url,
-                description: this.video.description
-            })
+            try {
+                window.casteaching.video.create( {
+                    title: this.video.title,
+                    url: this.video.url,
+                    description: this.video.description
+                })
+                bus.$emit('created')
+                bus.$emit('status', 'Video created successfully')
+            }catch (error) {
+                console.log(error)
+            }
+
         }
     }
 }
