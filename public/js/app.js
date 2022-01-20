@@ -7712,7 +7712,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       show: false,
-      message: ""
+      message: ''
     };
   },
   created: function created() {
@@ -7806,18 +7806,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _bus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bus */ "./resources/js/bus.js");
 //
 //
 //
 //
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "VideoEditLink",
   props: {
     video: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    edit: function edit() {
+      _bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('edit', this.video);
     }
   }
 });
@@ -7913,23 +7918,54 @@ __webpack_require__.r(__webpack_exports__);
   name: "VideoForm",
   data: function data() {
     return {
-      video: {}
+      video: {},
+      status: 'creating'
     };
   },
   methods: {
+    save: function save() {
+      if (this.status === 'creating') {
+        this.store();
+      }
+
+      if (this.status === 'editing') {
+        this.update();
+      }
+    },
     store: function store() {
       try {
         window.casteaching.video.create({
           title: this.video.title,
-          url: this.video.url,
-          description: this.video.description
+          description: this.video.description,
+          url: this.video.url
         });
         _bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('created');
         _bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('status', 'Video created successfully');
       } catch (error) {
         console.log(error);
       }
+    },
+    update: function update() {
+      try {
+        window.casteaching.video.update(this.video.id, {
+          title: this.video.title,
+          description: this.video.description,
+          url: this.video.url
+        });
+        _bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('created');
+        _bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('status', 'Video updated successfully');
+      } catch (error) {
+        console.log(error);
+      }
     }
+  },
+  created: function created() {
+    var _this = this;
+
+    _bus_js__WEBPACK_IMPORTED_MODULE_0__["default"].$on('edit', function (video) {
+      _this.video = video;
+      _this.status = 'editing';
+    });
   }
 });
 
@@ -27010,16 +27046,15 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "a",
-      {
-        staticClass: "text-indigo-600 hover:text-indigo-900",
-        attrs: { href: "/manage/videos/" + _vm.video.id },
-      },
-      [_vm._v("Edit")]
-    ),
-  ])
+  return _c(
+    "a",
+    {
+      staticClass: "text-indigo-600 hover:text-indigo-900 cursor-pointer",
+      attrs: { target: "_blank" },
+      on: { click: _vm.edit },
+    },
+    [_vm._v("Edit")]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -27071,11 +27106,11 @@ var render = function () {
                 _c(
                   "form",
                   {
-                    attrs: { "data-qa": "form_video_create" },
+                    attrs: { "data-qa": "form_video_create", method: "POST" },
                     on: {
                       submit: function ($event) {
                         $event.preventDefault()
-                        return _vm.store.apply(null, arguments)
+                        return _vm.save.apply(null, arguments)
                       },
                     },
                   },
@@ -27248,7 +27283,7 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                                    http://\n                                                  "
+                                            "\n                                                        http://\n                                                      "
                                           ),
                                         ]
                                       ),
@@ -27293,7 +27328,32 @@ var render = function () {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(1),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "px-4 py-3 bg-gray-50 text-right sm:px-6",
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                                attrs: { type: "submit" },
+                              },
+                              [
+                                _vm.status === "creating"
+                                  ? _c("span", [_vm._v("Crear")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.status === "editing"
+                                  ? _c("span", [_vm._v("Editar")])
+                                  : _vm._e(),
+                              ]
+                            ),
+                          ]
+                        ),
                       ]
                     ),
                   ]
@@ -27326,30 +27386,6 @@ var staticRenderFns = [
         ]),
       ]),
     ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "px-4 py-3 bg-gray-50 text-right sm:px-6" },
-      [
-        _c(
-          "button",
-          {
-            staticClass:
-              "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-            attrs: { type: "submit" },
-          },
-          [
-            _vm._v(
-              "\n                                Crear\n                            "
-            ),
-          ]
-        ),
-      ]
-    )
   },
 ]
 render._withStripped = true

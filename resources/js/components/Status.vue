@@ -32,12 +32,12 @@ export default {
     data() {
         return {
             show: false,
-            message: ""
+            message: ''
         }
     },
     created() {
-        bus.$on('status', (message) => {
-            this.message= message
+        bus.$on('status',(message) => {
+            this.message = message
             this.show = true
         });
     }
