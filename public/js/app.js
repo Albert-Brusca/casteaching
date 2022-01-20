@@ -27475,11 +27475,49 @@ var render = function () {
                     _vm._v(
                       "\n                    Videos\n                    "
                     ),
-                    _c("button", { on: { click: _vm.refresh } }, [
-                      _vm._v(
-                        "\n                        refresh\n                    "
-                      ),
-                    ]),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "content-end",
+                        on: { click: _vm.refresh },
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "h-8 w-8 text-red-500",
+                            attrs: {
+                              width: "24",
+                              height: "24",
+                              viewBox: "0 0 24 24",
+                              "stroke-width": "2",
+                              stroke: "currentColor",
+                              fill: "none",
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                            },
+                          },
+                          [
+                            _c("path", {
+                              attrs: { stroke: "none", d: "M0 0h24v24H0z" },
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d: "M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              attrs: {
+                                d: "M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5",
+                              },
+                            }),
+                            _vm._v("refresh"),
+                          ]
+                        ),
+                      ]
+                    ),
                   ]
                 ),
               ]
