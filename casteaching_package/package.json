@@ -1,6 +1,6 @@
 {
-  "name": "casteaching",
-  "version": "1.0.1",
+  "name": "@abrusca/casteaching",
+  "version": "1.0.2",
   "description": "Javascript package for API casteaching",
   "main": "index.js",
   "scripts": {
