@@ -129,14 +129,10 @@ class VideosManageControllerTest extends TestCase
             'url' => 'https://tubeme.acacha.org/http',
         ]);
 
-<<<<<<< HEAD
         Event::fake();
         $response = $this->post('/manage/videos',$videoArray);
 
         Event::assertDispatched(VideoCreated::class);
-=======
-        $response = $this->post('/manage/videos',$videoArray);
->>>>>>> 1c4a66a0f91a48a9d177a161f5c21e198b1b192c
 
         $response->assertRedirect(route('manage.videos'));
         $response->assertSessionHas('status', 'Successfully created');
