@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
 /**
@@ -18,7 +19,7 @@ use Tests\TestCase;
  */
 class VideosManageControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CanLogin;
 
 
     /** @test  */
@@ -128,10 +129,14 @@ class VideosManageControllerTest extends TestCase
             'url' => 'https://tubeme.acacha.org/http',
         ]);
 
+<<<<<<< HEAD
         Event::fake();
         $response = $this->post('/manage/videos',$videoArray);
 
         Event::assertDispatched(VideoCreated::class);
+=======
+        $response = $this->post('/manage/videos',$videoArray);
+>>>>>>> 1c4a66a0f91a48a9d177a161f5c21e198b1b192c
 
         $response->assertRedirect(route('manage.videos'));
         $response->assertSessionHas('status', 'Successfully created');
@@ -143,7 +148,6 @@ class VideosManageControllerTest extends TestCase
         $this->assertEquals($videoDB->description,$video->description);
         $this->assertEquals($videoDB->url,$video->url);
         $this->assertNull($video->published_at);
-
 
     }
 
@@ -239,24 +243,5 @@ class VideosManageControllerTest extends TestCase
 
         $response->assertViewIs('videos.manage.index');
     }
-    /**
-     * @test
-     */
-    private function loginAsVideoManager()
-    {
-        Auth::login(create_video_manager_user());
-    }
-    /**
-     * @test
-     */
-    private function loginAsSuperAdmin()
-    {
 
-        Auth::login(create_superadmin_user());
-    }
-
-    private function loginAsRegularUser()
-    {
-        Auth::login(create_regular_user());
-    }
 }
