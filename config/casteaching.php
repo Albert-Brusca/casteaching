@@ -8,6 +8,8 @@ return [
       'password_profe' => env('DEFAULT_USER_PROFE_PASSWORD'),
       'name_profe' => env('DEFAULT_USER_PROFE_NAME'),
       'email_profe' => env('DEFAULT_USER_PROFE_EMAIL')
-  ]
-
+  ],
+    'admins' => [
+        'abrusca@iesebre.com'
+    ]
 ];
