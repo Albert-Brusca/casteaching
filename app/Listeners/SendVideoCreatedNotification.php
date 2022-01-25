@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 use Tests\Unit\SendVideoCreatedNotificationTest;
 
-class SendVideoCreatedNotification
+class SendVideoCreatedNotification implements ShouldQueue
 {
 
     public static function testedBy()
