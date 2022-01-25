@@ -1,13 +1,13 @@
 # Instal·lació
 
 ```bash 
-npm install @acacha/casteaching
+npm install @abrusca/casteachingalbert
 ``` 
 
 # Usage
 
 ```javascript
-import casteaching from 'casteaching'
+import casteaching from '@abrusca/casteachingalbert'
 // Obtenir llista de vídeos publicats
 casteaching.videos()
 // Obtenir vídeo per ID
