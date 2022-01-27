@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const apiClient = axios.create({
 
-    baseURL: 'http://casteaching.test/api',
+    baseURL: process.env.MIX_API_URL,
     withCredentials: true,
     headers: {
         Accept: 'application/json',
