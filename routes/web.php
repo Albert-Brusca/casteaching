@@ -58,5 +58,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::put('/vue/manage/videos/{id}',[ VideosManageVueController::class,'update' ])->middleware(['can:videos_manage_update']);
 
 
+
 });
 
