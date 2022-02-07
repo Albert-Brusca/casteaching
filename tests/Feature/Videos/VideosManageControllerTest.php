@@ -3,6 +3,7 @@
 namespace Tests\Feature\Videos;
 
 use App\Events\VideoCreated;
+use App\Models\Serie;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Database\Eloquent\Collection;
@@ -146,6 +147,60 @@ class VideosManageControllerTest extends TestCase
         $this->assertNull($video->published_at);
 
     }
+    /** @test  */
+    public function user_with_permissions_can_store_videos_with_serie()
+    {
+        $this->loginAsVideoManager();
+
+        $serie = Serie::create([
+            'title' => 'TDD (Test Driven Development)',
+            'description' => 'Bla bla bla',
+            'image' => 'tdd.png',
+            'teacher_name' => 'Sergi Tur Badenas',
+            'teacher_photo_url' => 'https://www.gravatar.com/avatar/' . md5('sergiturbadenas@gmail.com'),
+        ]);
+
+        $video = objectify($videoArray = [
+            'title' => 'HTTP for noobs',
+            'description' => 'Te ensenyo tot el que se sobre HTTP',
+            'url' => 'https://tubeme.acacha.org/http',
+            'serie_id' => $serie->id
+        ]);
+
+        $response = $this->post('/manage/videos',$videoArray);
+
+
+        $response->assertRedirect(route('manage.videos'));
+        $response->assertSessionHas('status', 'Successfully created');
+
+        $videoDB = Video::first();
+
+        $this->assertNotNull($videoDB);
+        $this->assertEquals($videoDB->title,$video->title);
+        $this->assertEquals($videoDB->description,$video->description);
+        $this->assertEquals($videoDB->url,$video->url);
+        $this->assertEquals($videoDB->serie_id,$serie->id);
+        $this->assertNull($video->published_at);
+
+    }
+
+    /** @test */
+    public function title_is_required()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /** @test */
+    public function description_is_required()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /** @test */
+    public function url_is_required()
+    {
+        $this->markTestIncomplete();
+    }
 
     /** @test  */
     public function user_with_permissions_can_see_add_videos()
@@ -207,6 +262,7 @@ class VideosManageControllerTest extends TestCase
             $response->assertSee($video->title);
         }
     }
+
     /**
      * @test
      */

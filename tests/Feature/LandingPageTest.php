@@ -7,13 +7,15 @@ use Tests\TestCase;
 
 class LandingPageTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic test example.
-     *
+     * @test
      * @return void
      */
     public function test_example()
     {
+
         $response = $this->get('/');
 
         $response->assertStatus(200);

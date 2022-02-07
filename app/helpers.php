@@ -54,7 +54,7 @@ if (! function_exists('create_default_videos')) {
             'published_at' => Carbon::parse('December 13, 2020 8:00pm'),
             'previous' => null,
             'next' => null,
-            'series_id' => 1
+            'serie_id' => 1
         ]);
     }
 }
@@ -85,22 +85,25 @@ if (! function_exists('create_video_manager_user')) {
         $user = User::create([
             'name' => 'VideosManager',
             'email' => 'videosmanager@casteaching.com',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('12345678')
         ]);
 
         Permission::create(['name' => 'videos_manage_index']);
+        Permission::create(['name' => 'videos_manage_show']);
         Permission::create(['name' => 'videos_manage_create']);
-        Permission::create(['name' => 'videos_manage_destroy']);
+        Permission::create(['name' => 'videos_manage_store']);
         Permission::create(['name' => 'videos_manage_edit']);
         Permission::create(['name' => 'videos_manage_update']);
+        Permission::create(['name' => 'videos_manage_destroy']);
         $user->givePermissionTo('videos_manage_index');
+        $user->givePermissionTo('videos_manage_show');
         $user->givePermissionTo('videos_manage_create');
+        $user->givePermissionTo('videos_manage_store');
         $user->givePermissionTo('videos_manage_destroy');
         $user->givePermissionTo('videos_manage_edit');
         $user->givePermissionTo('videos_manage_update');
 
         add_personal_team($user);
-
         return $user;
     }
 }

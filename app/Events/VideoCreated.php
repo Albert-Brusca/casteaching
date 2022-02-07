@@ -14,9 +14,7 @@ class VideoCreated
 
     public Video $video;
 
-    /**
-     * @param Video $video
-     */
+
     public function __construct(Video $video)
     {
         $this->video = $video;
