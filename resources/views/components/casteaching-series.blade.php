@@ -55,7 +55,7 @@
                   &middot;
                 </span>
                                         <span>
-                  6 min read
+                  6 min read (TODO)
                 </span>
                                     </div>
                                 </div>

@@ -1,0 +1,55 @@
+{
+    "name": "github-php/sponsors",
+    "description": "A package for PHP to interact with GitHub Sponsors.",
+    "keywords": ["GitHub", "Sponsors", "Laravel"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/github-php/sponsors/issues",
+        "source": "https://github.com/github-php/sponsors"
+    },
+    "authors": [
+        {
+            "name": "Dries Vints",
+            "homepage": "https://driesvints.com"
+        },
+        {
+            "name": "Tom Witkowski",
+            "homepage": "https://gummibeer.dev"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "illuminate/collections": "^8.0|^9.0",
+        "illuminate/http": "^8.0|^9.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0|^7.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "GitHub\\Sponsors\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "aliases": {
+                "GitHubSponsors": "GitHub\\Sponsors\\Facades\\GitHubSponsors"
+            },
+            "providers": [
+                "GitHub\\Sponsors\\GitHubSponsorsServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

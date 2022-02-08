@@ -11,12 +11,13 @@
         <div class="mx-auto sm:px-6 lg:px-8 w-full max-w-7xl">
             <status></status>
 
-            @can('videos_manage_create')
-                <video-form></video-form>
+            <div id="app">
+                @can('videos_manage_create')
+                    <video-form></video-form>
+                @endcan
 
-            @endcan
-
-            <videos-list></videos-list>
+                    <videos-list></videos-list>
+            </div>
         </div>
     </div>
 

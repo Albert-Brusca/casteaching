@@ -35,7 +35,8 @@ if (! function_exists('create_default_user')) {
             Team::create([
                 'name' => $userprof->name . "'s Team",
                 'user_id' => $userprof->id,
-                'personal_team' => true
+                'personal_team' => true,
+
             ]);
         } catch (\Exception $exception) {
 
