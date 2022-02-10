@@ -64,7 +64,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 Route::get('/github_sponsors', function () {
     $client = app(Client::class);
-    dump($sponsors = $client->login('acacha')->sponsors());
+    dump($sponsors = $client->login('Albert-Brusca')->sponsors());
     foreach ($sponsors as $sponsor) {
         dump($sponsor['avatarUrl']); // The sponsor's GitHub avatar url...
         dump($sponsor['name']); // The sponsor's GitHub name...

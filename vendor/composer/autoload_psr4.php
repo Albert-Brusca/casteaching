@@ -111,4 +111,5 @@ return array(
     'BaconQrCode\\' => array($vendorDir . '/bacon/bacon-qr-code/src'),
     'Asm89\\Stack\\' => array($vendorDir . '/asm89/stack-cors/src'),
     'App\\' => array($baseDir . '/app'),
+    'Alaouy\\Youtube\\' => array($vendorDir . '/alaouy/youtube/src'),
 );

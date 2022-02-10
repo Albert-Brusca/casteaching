@@ -6,6 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Alaouy\\Youtube\\Facades\\Youtube' => $vendorDir . '/alaouy/youtube/src/Facades/Youtube.php',
+    'Alaouy\\Youtube\\Rules\\ValidYoutubeVideo' => $vendorDir . '/alaouy/youtube/src/Rules/ValidYoutubeVideo.php',
+    'Alaouy\\Youtube\\Youtube' => $vendorDir . '/alaouy/youtube/src/Youtube.php',
+    'Alaouy\\Youtube\\YoutubeServiceProvider' => $vendorDir . '/alaouy/youtube/src/YoutubeServiceProvider.php',
     'App\\Actions\\Fortify\\CreateNewUser' => $baseDir . '/app/Actions/Fortify/CreateNewUser.php',
     'App\\Actions\\Fortify\\PasswordValidationRules' => $baseDir . '/app/Actions/Fortify/PasswordValidationRules.php',
     'App\\Actions\\Fortify\\ResetUserPassword' => $baseDir . '/app/Actions/Fortify/ResetUserPassword.php',
@@ -23,6 +27,7 @@ return array(
     'App\\Events\\VideoCreated' => $baseDir . '/app/Events/VideoCreated.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\GithubAuthController' => $baseDir . '/app/Http/Controllers/GithubAuthController.php',
     'App\\Http\\Controllers\\LandingPageController' => $baseDir . '/app/Http/Controllers/LandingPageController.php',
     'App\\Http\\Controllers\\SanctumTokenController' => $baseDir . '/app/Http/Controllers/SanctumTokenController.php',
     'App\\Http\\Controllers\\SeriesApiController' => $baseDir . '/app/Http/Controllers/SeriesApiController.php',
@@ -5840,6 +5845,8 @@ return array(
     'Tests\\Feature\\DeleteTeamTest' => $baseDir . '/tests/Feature/DeleteTeamTest.php',
     'Tests\\Feature\\EmailVerificationTest' => $baseDir . '/tests/Feature/EmailVerificationTest.php',
     'Tests\\Feature\\ExampleTest' => $baseDir . '/tests/Feature/ExampleTest.php',
+    'Tests\\Feature\\GithubAuthControllerTest' => $baseDir . '/tests/Feature/GithubAuthControllerTest.php',
+    'Tests\\Feature\\GithubDriverMock' => $baseDir . '/tests/Feature/GithubDriverMock.php',
     'Tests\\Feature\\InviteTeamMemberTest' => $baseDir . '/tests/Feature/InviteTeamMemberTest.php',
     'Tests\\Feature\\LandingPageControllerTest' => $baseDir . '/tests/Feature/LandingPageControllerTest.php',
     'Tests\\Feature\\LandingPageTest' => $baseDir . '/tests/Feature/LandingPageTest.php',

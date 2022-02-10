@@ -30,7 +30,6 @@ class GithubAuthControllerTest extends TestCase
     /** @test */
     public function can_process_a_github_callback()
     {
-        $this->withoutExceptionHandling();
         $this->assertGuest();
 
         Socialite::shouldReceive('driver')

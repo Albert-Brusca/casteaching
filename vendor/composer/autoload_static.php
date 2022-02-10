@@ -207,6 +207,7 @@ class ComposerStaticInit90f2cf3728d1d9b8c26aa00e08477cfb
         array (
             'Asm89\\Stack\\' => 12,
             'App\\' => 4,
+            'Alaouy\\Youtube\\' => 15,
         ),
     );
 
@@ -635,6 +636,10 @@ class ComposerStaticInit90f2cf3728d1d9b8c26aa00e08477cfb
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'Alaouy\\Youtube\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/alaouy/youtube/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -655,6 +660,10 @@ class ComposerStaticInit90f2cf3728d1d9b8c26aa00e08477cfb
     );
 
     public static $classMap = array (
+        'Alaouy\\Youtube\\Facades\\Youtube' => __DIR__ . '/..' . '/alaouy/youtube/src/Facades/Youtube.php',
+        'Alaouy\\Youtube\\Rules\\ValidYoutubeVideo' => __DIR__ . '/..' . '/alaouy/youtube/src/Rules/ValidYoutubeVideo.php',
+        'Alaouy\\Youtube\\Youtube' => __DIR__ . '/..' . '/alaouy/youtube/src/Youtube.php',
+        'Alaouy\\Youtube\\YoutubeServiceProvider' => __DIR__ . '/..' . '/alaouy/youtube/src/YoutubeServiceProvider.php',
         'App\\Actions\\Fortify\\CreateNewUser' => __DIR__ . '/../..' . '/app/Actions/Fortify/CreateNewUser.php',
         'App\\Actions\\Fortify\\PasswordValidationRules' => __DIR__ . '/../..' . '/app/Actions/Fortify/PasswordValidationRules.php',
         'App\\Actions\\Fortify\\ResetUserPassword' => __DIR__ . '/../..' . '/app/Actions/Fortify/ResetUserPassword.php',
@@ -672,6 +681,7 @@ class ComposerStaticInit90f2cf3728d1d9b8c26aa00e08477cfb
         'App\\Events\\VideoCreated' => __DIR__ . '/../..' . '/app/Events/VideoCreated.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\GithubAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/GithubAuthController.php',
         'App\\Http\\Controllers\\LandingPageController' => __DIR__ . '/../..' . '/app/Http/Controllers/LandingPageController.php',
         'App\\Http\\Controllers\\SanctumTokenController' => __DIR__ . '/../..' . '/app/Http/Controllers/SanctumTokenController.php',
         'App\\Http\\Controllers\\SeriesApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/SeriesApiController.php',
@@ -6489,6 +6499,8 @@ class ComposerStaticInit90f2cf3728d1d9b8c26aa00e08477cfb
         'Tests\\Feature\\DeleteTeamTest' => __DIR__ . '/../..' . '/tests/Feature/DeleteTeamTest.php',
         'Tests\\Feature\\EmailVerificationTest' => __DIR__ . '/../..' . '/tests/Feature/EmailVerificationTest.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
+        'Tests\\Feature\\GithubAuthControllerTest' => __DIR__ . '/../..' . '/tests/Feature/GithubAuthControllerTest.php',
+        'Tests\\Feature\\GithubDriverMock' => __DIR__ . '/../..' . '/tests/Feature/GithubDriverMock.php',
         'Tests\\Feature\\InviteTeamMemberTest' => __DIR__ . '/../..' . '/tests/Feature/InviteTeamMemberTest.php',
         'Tests\\Feature\\LandingPageControllerTest' => __DIR__ . '/../..' . '/tests/Feature/LandingPageControllerTest.php',
         'Tests\\Feature\\LandingPageTest' => __DIR__ . '/../..' . '/tests/Feature/LandingPageTest.php',
