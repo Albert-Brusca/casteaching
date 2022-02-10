@@ -52,7 +52,7 @@
             </x-jet-form-section>
 
             <x-jet-section-border />
-          
+
 
         @endcan
 
