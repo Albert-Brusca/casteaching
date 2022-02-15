@@ -8,7 +8,7 @@
 
         @can('videos_manage_create')
 
-            <x-jet-form-section>
+            <x-jet-form-section data-qa="form_video_edit">
                 <x-slot name="title">
                     {{ __('Videos') }}
                 </x-slot>

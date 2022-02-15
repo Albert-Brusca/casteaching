@@ -12,7 +12,7 @@
             <x-status></x-status>
 
             @can('series_manage_create')
-                <x-jet-form-section>
+                <x-jet-form-section data-qa="form_serie_create">
                     <x-slot name="title">
                         {{ __('Series') }}
                     </x-slot>

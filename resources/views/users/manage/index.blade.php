@@ -10,7 +10,7 @@
         @can('users_manage_create')
 
 
-                <x-jet-form-section>
+                <x-jet-form-section data-qa="form_user_create">
                     <x-slot name="title">
                         {{ __('Users') }}
                     </x-slot>
