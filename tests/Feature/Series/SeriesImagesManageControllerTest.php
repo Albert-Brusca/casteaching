@@ -32,14 +32,93 @@ class SeriesImagesManageControllerTest extends TestCase
         Storage::fake('public');
 
         $response = $this->put('/manage/series/' . $serie1->id . '/image/',[
-            'image' => $file = UploadedFile::fake()->image('serie1.jpg'),
+            'image' => $file = UploadedFile::fake()->image('serie.jpg',960,540),
         ]);
 
         $response->assertRedirect();
-        Storage::disk('public')->assertExists('/series/'. $file->hashName());
         $response->assertSessionHas('status', __('Successfully updated'));
+        Storage::disk('public')->assertExists('/series/'. $file->hashName());
+
 
         $this->assertEquals($serie1->refresh()->image,'series/'.$file->hashName());
-        $this->assertNotNull($serie1->refresh()->image);
+        $this->assertNotNull($serie1->image);
+        $this->assertFileEquals($file->getPathname(),Storage::disk('public')->path($serie1->image));
+    }
+
+    /** @test */
+    public function series_image_have_to_be_an_image()
+    {
+        $this->loginAsSeriesManager();
+
+        $serie1 = Serie::create([
+            'title' => 'TDD',
+            'description' => 'Aprèn tot sobre TDD',
+            'image' => 'series/serieTDD.png',
+            'teacher_name' => 'Albert Brusca'
+        ]);
+
+        Storage::fake('public');
+
+        $response = $this->put('/manage/series/' . $serie1->id . '/image/',[
+            'image' => $file = UploadedFile::fake()->create('serie1.pdf',0,'application/pdf'),
+        ]);
+
+        $response->assertRedirect();
+
+        $response->assertSessionHasErrors('image');
+
+        $this->assertEquals('series/serieTDD.png',$serie1->refresh()->image);
+
+
+    }
+
+    /** @test */
+    function series_image_must_be_at_least_400px_height()
+    {
+        $this->loginAsSeriesManager();
+
+        $serie1 = Serie::create([
+            'title' => 'TDD',
+            'description' => 'Aprèn tot sobre TDD',
+            'image' => 'series/serieTDD.png',
+            'teacher_name' => 'Albert Brusca'
+        ]);
+
+        Storage::fake('public');
+        $response = $this->put('/manage/series/' . $serie1->id . '/image/',[
+            'image' => $file = $file = UploadedFile::fake()->image('serie1.jpg', 200, 399),
+        ]);
+
+        $response->assertRedirect();
+
+        $response->assertSessionHasErrors('image');
+
+        $this->assertEquals('series/serieTDD.png',$serie1->refresh()->image);
+    }
+
+    /** @test */
+    function series_image_must_be_aspect_ratio_16_9()
+    {
+        $this->loginAsSeriesManager();
+
+        $serie1 = Serie::create([
+            'title' => 'TDD',
+            'description' => 'Aprèn tot sobre TDD',
+            'image' => 'series/serieTDD.png',
+            'teacher_name' => 'Sergi Tur'
+        ]);
+
+        Storage::fake('public');
+        $response = $this->put('/manage/series/' . $serie1->id . '/image/', [
+            'image' => $file = $file = UploadedFile::fake()->image('serie1.jpg', 6000, 400),
+        ]);
+
+        $response->assertRedirect();
+
+        $response->assertSessionHasErrors('image', function ($error) {
+            dd($error);
+        });
+
+        $this->assertEquals('series/serieTDD.png', $serie1->refresh()->image);
     }
 }
