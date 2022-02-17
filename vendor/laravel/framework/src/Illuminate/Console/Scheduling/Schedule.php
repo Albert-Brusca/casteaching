@@ -14,7 +14,6 @@ use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\CallQueuedClosure;
 use Illuminate\Support\ProcessUtils;
-use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Macroable;
 use RuntimeException;
 
@@ -120,7 +119,11 @@ class Schedule
     public function command($command, array $parameters = [])
     {
         if (class_exists($command)) {
-            $command = Container::getInstance()->make($command)->getName();
+            $command = Container::getInstance()->make($command);
+
+            return $this->exec(
+                Application::formatCommandString($command->getName()), $parameters,
+            )->description($command->getDescription());
         }
 
         return $this->exec(
@@ -268,11 +271,11 @@ class Schedule
             return ProcessUtils::escapeArgument($value);
         });
 
-        if (Str::startsWith($key, '--')) {
+        if (str_starts_with($key, '--')) {
             $value = $value->map(function ($value) use ($key) {
                 return "{$key}={$value}";
             });
-        } elseif (Str::startsWith($key, '-')) {
+        } elseif (str_starts_with($key, '-')) {
             $value = $value->map(function ($value) use ($key) {
                 return "{$key} {$value}";
             });

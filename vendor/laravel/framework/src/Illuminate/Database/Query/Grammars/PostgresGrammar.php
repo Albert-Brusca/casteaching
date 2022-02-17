@@ -4,7 +4,6 @@ namespace Illuminate\Database\Query\Grammars;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 
 class PostgresGrammar extends Grammar
 {
@@ -22,7 +21,16 @@ class PostgresGrammar extends Grammar
     ];
 
     /**
-     * {@inheritdoc}
+     * The grammar specific bit operators.
+     *
+     * @var array
+     */
+    protected $bitOperators = [
+        '~', '&', '|', '#', '<<', '>>', '<<=', '>>=',
+    ];
+
+    /**
+     * Compile a basic where clause.
      *
      * @param  \Illuminate\Database\Query\Builder  $query
      * @param  array  $where
@@ -30,7 +38,7 @@ class PostgresGrammar extends Grammar
      */
     protected function whereBasic(Builder $query, $where)
     {
-        if (Str::contains(strtolower($where['operator']), 'like')) {
+        if (str_contains(strtolower($where['operator']), 'like')) {
             return sprintf(
                 '%s::text %s %s',
                 $this->wrap($where['column']),
@@ -86,6 +94,71 @@ class PostgresGrammar extends Grammar
     }
 
     /**
+     * Compile a "where fulltext" clause.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  array  $where
+     * @return string
+     */
+    public function whereFullText(Builder $query, $where)
+    {
+        $language = $where['options']['language'] ?? 'english';
+
+        if (! in_array($language, $this->validFullTextLanguages())) {
+            $language = 'english';
+        }
+
+        $columns = collect($where['columns'])->map(function ($column) use ($language) {
+            return "to_tsvector('{$language}', {$this->wrap($column)})";
+        })->implode(' || ');
+
+        $mode = 'plainto_tsquery';
+
+        if (($where['options']['mode'] ?? []) === 'phrase') {
+            $mode = 'phraseto_tsquery';
+        }
+
+        if (($where['options']['mode'] ?? []) === 'websearch') {
+            $mode = 'websearch_to_tsquery';
+        }
+
+        return "({$columns}) @@ {$mode}('{$language}', {$this->parameter($where['value'])})";
+    }
+
+    /**
+     * Get an array of valid full text languages.
+     *
+     * @return array
+     */
+    protected function validFullTextLanguages()
+    {
+        return [
+            'simple',
+            'arabic',
+            'danish',
+            'dutch',
+            'english',
+            'finnish',
+            'french',
+            'german',
+            'hungarian',
+            'indonesian',
+            'irish',
+            'italian',
+            'lithuanian',
+            'nepali',
+            'norwegian',
+            'portuguese',
+            'romanian',
+            'russian',
+            'spanish',
+            'swedish',
+            'tamil',
+            'turkish',
+        ];
+    }
+
+    /**
      * Compile the "select *" portion of the query.
      *
      * @param  \Illuminate\Database\Query\Builder  $query
@@ -138,7 +211,7 @@ class PostgresGrammar extends Grammar
     {
         $column = str_replace('->>', '->', $this->wrap($column));
 
-        return 'json_array_length(('.$column.')::json) '.$operator.' '.$value;
+        return 'jsonb_array_length(('.$column.')::jsonb) '.$operator.' '.$value;
     }
 
     /**

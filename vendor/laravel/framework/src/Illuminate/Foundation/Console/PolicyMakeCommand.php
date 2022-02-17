@@ -17,6 +17,15 @@ class PolicyMakeCommand extends GeneratorCommand
     protected $name = 'make:policy';
 
     /**
+     * The name of the console command.
+     *
+     * This name is used to identify the command during lazy loading.
+     *
+     * @var string|null
+     */
+    protected static $defaultName = 'make:policy';
+
+    /**
      * The console command description.
      *
      * @var string
@@ -85,6 +94,10 @@ class PolicyMakeCommand extends GeneratorCommand
             throw new LogicException('The ['.$guard.'] guard is not defined in your "auth" configuration file.');
         }
 
+        if (! $config->get('auth.providers.'.$guardProvider.'.model')) {
+            return 'App\\Models\\User';
+        }
+
         return $config->get(
             'auth.providers.'.$guardProvider.'.model'
         );
@@ -101,7 +114,7 @@ class PolicyMakeCommand extends GeneratorCommand
     {
         $model = str_replace('/', '\\', $model);
 
-        if (Str::startsWith($model, '\\')) {
+        if (str_starts_with($model, '\\')) {
             $namespacedModel = trim($model, '\\');
         } else {
             $namespacedModel = $this->qualifyModel($model);

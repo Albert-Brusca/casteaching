@@ -210,7 +210,7 @@ trait BuildsQueries
     /**
      * Query lazily, by chunking the results of a query by comparing IDs.
      *
-     * @param  int  $count
+     * @param  int  $chunkSize
      * @param  string|null  $column
      * @param  string|null  $alias
      * @return \Illuminate\Support\LazyCollection
@@ -225,7 +225,7 @@ trait BuildsQueries
     /**
      * Query lazily, by chunking the results of a query by comparing IDs in descending order.
      *
-     * @param  int  $count
+     * @param  int  $chunkSize
      * @param  string|null  $column
      * @param  string|null  $alias
      * @return \Illuminate\Support\LazyCollection
@@ -240,7 +240,7 @@ trait BuildsQueries
     /**
      * Query lazily, by chunking the results of a query by comparing IDs in a given order.
      *
-     * @param  int  $count
+     * @param  int  $chunkSize
      * @param  string|null  $column
      * @param  string|null  $alias
      * @param  bool  $descending
@@ -457,10 +457,12 @@ trait BuildsQueries
      * Pass the query to a given callback.
      *
      * @param  callable  $callback
-     * @return $this|mixed
+     * @return $this
      */
     public function tap($callback)
     {
-        return $this->when(true, $callback);
+        $callback($this);
+
+        return $this;
     }
 }
