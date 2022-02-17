@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Tests\Unit\SerieTest;
@@ -38,5 +39,12 @@ class Serie extends Model
     public function getCreatedAtTimestampAttribute()
     {
         return optional($this->created_at)->timestamp;
+    }
+
+    protected function imageUrl(): Attribute{
+
+        return new Attribute(
+            get: fn ($value) => is_null($this->image) ? 'series/placeholder.png' : $this->image ,
+        );
     }
 }

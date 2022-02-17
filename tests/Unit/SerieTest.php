@@ -43,4 +43,21 @@ class SerieTest extends TestCase
         $this->assertNotNull($serie->videos);
         $this->assertCount(1,$serie->videos);
     }
+
+    /**
+     * @test
+     */
+    public function serie_have_placeholder_image() {
+        $serie = Serie::create([
+           'title' => 'Exemple serie',
+           'description' => 'Serie example description'
+        ]);
+
+        $this->assertNull($serie->image);
+
+        $this->assertNotNull($serie->image_url);
+
+//        dd($serie->image_url);
+        $this->assertEquals('series/placeholder.png',$serie->image_url);
+    }
 }
