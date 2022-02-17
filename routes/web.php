@@ -72,23 +72,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 });
 
-
-Route::get('/github_sponsors', function () {
-    $client = app(Client::class);
-    dump($sponsors = $client->login('Albert-Brusca')->sponsors());
-    foreach ($sponsors as $sponsor) {
-        dump($sponsor['avatarUrl']); // The sponsor's GitHub avatar url...
-        dump($sponsor['name']); // The sponsor's GitHub name...
-    }
-
-    dump($sponsors = $client->login('driesvints')->sponsors());
-    foreach ($sponsors as $sponsor) {
-        dump($sponsor);
-    }
-
-    dd($client->login('acacha')->isSponsoredBy('acacha'));
-});
-
 Route::get('/auth/redirect', [GithubAuthController::class,'redirect']);
 
 Route::get('/auth/callback', [GithubAuthController::class,'callback']);

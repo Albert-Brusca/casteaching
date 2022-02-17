@@ -52,18 +52,16 @@ class YoutubeImportPlaylist extends Command
         $this->info('Creating serie...');
 
         $temp = tmpfile();
-        $path = stream_get_meta_data($temp)['uri']; // eg: /tmp/phpFx0513a
+        $path = stream_get_meta_data($temp)['uri'];
         copy($playlist->snippet->thumbnails->maxres->url, $path);
         $path = Storage::disk('public')->putFile('series', new File($path));
-
         $serie = Serie::create([
             'title' => $playlist->snippet->title,
             'description' => $playlist->snippet->description,
             'image' => $path,
-            'teacher_name' => 'Sergi Tur Badenas',
+            'teacher_name' => 'Albert Brusca',
             'teacher_photo_url' => 'https://www.gravatar.com/avatar/046889f49471fd40d105eb76b9d83bf6'
         ]);
-
         $items = Youtube::getPlaylistItemsByPlaylistId($this->argument('playlistId'));
         $previous = null;
         foreach ($items['results'] as $item) {

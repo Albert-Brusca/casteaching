@@ -19,7 +19,7 @@ class SanctumTokenControllerTest extends TestCase
     public function email_is_required_for_issuing_tokens()
     {
         $response = $this->postJson('/api/sanctum/token',[
-            'password' => '12345678',
+            'password' => 'password',
             'device_name' => "Pepe's device",
         ]);
 
@@ -34,12 +34,14 @@ class SanctumTokenControllerTest extends TestCase
     public function email_is_valid_for_issuing_tokens()
     {
         $response = $this->postJson('/api/sanctum/token',[
-            'email' => 'notvalidemail',
-            'password' => '12345678',
+            'email' => 'notvalid',
+            'password' => 'password',
             'device_name' => "Pepe's device",
         ]);
 
         $response->assertStatus(422);
+
+
         $jsonResponse = json_decode($response->getContent());
         $this->assertEquals("The email must be a valid email address.",$jsonResponse->message);
         $this->assertEquals("The email must be a valid email address.",$jsonResponse->errors->email[0]);
@@ -49,7 +51,7 @@ class SanctumTokenControllerTest extends TestCase
     public function password_is_required_for_issuing_tokens()
     {
         $response = $this->postJson('/api/sanctum/token',[
-            'email' => 'sergiturbadenas@gmail.com',
+            'email' => 'abrusca@gmail.com',
             'device_name' => "Pepe's device",
         ]);
 
@@ -63,8 +65,8 @@ class SanctumTokenControllerTest extends TestCase
     public function device_name_is_required_for_issuing_tokens()
     {
         $response = $this->postJson('/api/sanctum/token',[
-            'email' => 'sergiturbadenas@gmail.com',
-            'password' => '12345678',
+            'email' => 'abrusca@gmail.com',
+            'password' => 'password',
         ]);
 
         $response->assertStatus(422);
@@ -79,7 +81,7 @@ class SanctumTokenControllerTest extends TestCase
         $user = User::create([
             'name' => 'Pepe Pardo Jeans',
             'email' => 'pepe@pardojeans.com',
-            'password' => '12345678'
+            'password' => 'password'
         ]);
 
         $response = $this->postJson('/api/sanctum/token',[
@@ -100,7 +102,7 @@ class SanctumTokenControllerTest extends TestCase
         $user = User::create([
             'name' => 'Pepe Pardo Jeans',
             'email' => 'pepe@pardojeans.com',
-            'password' => '12345678'
+            'password' => 'password'
         ]);
 
         $response = $this->postJson('/api/sanctum/token',[
@@ -123,14 +125,14 @@ class SanctumTokenControllerTest extends TestCase
         $user = User::create([
             'name' => 'Pepe Pardo Jeans',
             'email' => 'pepe@pardojeans.com',
-            'password' => Hash::make('123456')
+            'password' => Hash::make('password')
         ]);
 
         $this->assertCount(0,$user->tokens);
 
         $response = $this->postJson('/api/sanctum/token', [
             'email' => $user->email,
-            'password' => "123456",
+            'password' => "password",
             'device_name' => $user->name . "'s device",
         ]);
 
