@@ -364,6 +364,7 @@ if (! function_exists('create_sample_series')) {
             "teacher_photo_url" => "https://www.gravatar.com/avatar/" . md5('sergiturbadenas@gmail.com')
         ]);
 
+        sleep(1);
         $path = Storage::disk('public')->putFile('series', new File(base_path('series_photos/crud_amb_vue_laravel.png')));
 
         $serie2 = Serie::create([

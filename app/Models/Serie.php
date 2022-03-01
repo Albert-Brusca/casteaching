@@ -41,10 +41,13 @@ class Serie extends Model
         return optional($this->created_at)->timestamp;
     }
 
+    /**
+     * @return Attribute
+     */
     protected function imageUrl(): Attribute{
 
         return new Attribute(
-            get: fn ($value) => is_null($this->image) ? 'series/placeholder.png' : $this->image ,
+            get: fn ($value) => $this->image ?? 'series/placeholder.png',
         );
     }
 }
