@@ -25,8 +25,8 @@ if (! function_exists('create_default_user')) {
 
         $userprof = User::create([
             'name' => 'Sergi Tur',
-            'email' => 'sergitur@gmail.com',
-            'password' => Hash::make('password')
+            'email' => 'sergiturbadenas@gmail.com',
+            'password' => Hash::make('12345678')
         ]);
         $userprof->superadmin = true;
         $userprof->save();
