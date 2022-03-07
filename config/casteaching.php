@@ -10,6 +10,7 @@ return [
       'email_profe' => env('DEFAULT_USER_PROFE_EMAIL')
   ],
     'admins' => [
-        'abrusca@iesebre.com'
+        'abrusca@iesebre.com',
+        'sergiturbadenas@gmail.com'
     ]
 ];
