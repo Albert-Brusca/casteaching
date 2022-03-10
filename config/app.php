@@ -234,6 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'Youtube' => \Alaouy\Youtube\YoutubeServiceProvider::class,
+        'Image' => \Intervention\Image\ImageManagerStatic::class,
 
     ],
 

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\SeriesImageUpdated;
 use App\Events\VideoCreated;
+use App\Listeners\ScheduleSeriesImageProcessing;
 use App\Listeners\SendVideoCreatedNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         VideoCreated::class => [
             SendVideoCreatedNotification::class,
+        ],
+        SeriesImageUpdated::class => [
+            ScheduleSeriesImageProcessing::class,
         ]
     ];
 
