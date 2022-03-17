@@ -60,4 +60,41 @@ class SerieTest extends TestCase
 //        dd($serie->image_url);
         $this->assertEquals('series/placeholder.png',$serie->image_url);
     }
+
+    /**
+     * @test
+     */
+    public function series_have_url_linking_to_first_video_serie()
+    {
+        $serie = Serie::create([
+            'title' => 'TDD',
+            'description' => 'bla bla bla'
+        ]);
+
+        $video = Video::create([
+            'title' => 'Intro a TDD',
+            'description' => 'bla bla bla',
+            'serie_id' => $serie->id,
+            'url' => 'https://youtu.be/w8j07_DBl_I',
+
+        ]);
+        $this->assertNotNull($serie->url);
+
+        $this->assertEquals('/videos/' . $video->id, $serie->url);
+    }
+
+    /**
+     * @test
+     */
+    public function series_have_url_linking_to_nothing_if_no_videos()
+    {
+        $serie = Serie::create([
+            'title' => 'TDD',
+            'description' => 'bla bla bla'
+        ]);
+
+        $this->assertNotNull($serie->url);
+
+        $this->assertEquals('#', $serie->url);
+    }
 }

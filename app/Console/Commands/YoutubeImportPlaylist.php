@@ -59,7 +59,7 @@ class YoutubeImportPlaylist extends Command
             'title' => $playlist->snippet->title,
             'description' => $playlist->snippet->description,
             'image' => $path,
-            'teacher_name' => 'Albert Brusca',
+            'teacher_name' => 'Sergi Tur',
             'teacher_photo_url' => 'https://www.gravatar.com/avatar/046889f49471fd40d105eb76b9d83bf6'
         ]);
         $items = Youtube::getPlaylistItemsByPlaylistId($this->argument('playlistId'));

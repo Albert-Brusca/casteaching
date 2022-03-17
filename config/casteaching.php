@@ -11,6 +11,5 @@ return [
   ],
     'admins' => [
         'abrusca@iesebre.com',
-        'sergiturbadenas@gmail.com'
     ]
 ];
