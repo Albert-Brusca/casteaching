@@ -76,7 +76,7 @@ class VideoTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Video proba');
-        $response->assertSee('Here description');
+        $response->assertSee('Description');
         $response->assertSee('13 de desembre de 2020');
         $response->assertSee('https://youtu.be/w8j07_DBl_I');
 
