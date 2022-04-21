@@ -10,6 +10,8 @@ use App\Http\Controllers\VideosManageVueController;
 use GitHub\Sponsors\Client;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use Kanuu\Laravel\Facades\Kanuu;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +77,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 Route::get('/auth/redirect', [GithubAuthController::class,'redirect']);
 
 Route::get('/auth/callback', [GithubAuthController::class,'callback']);
+
+Kanuu::redirectRoute()
+    ->middleware('auth')
+    ->name('kanuu.redirect');
 
 
 
